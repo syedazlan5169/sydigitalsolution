@@ -1,0 +1,11 @@
+
+/* TEAM */
+Developer: SY Digital Solution
+Contact: admin@sydigitalsolution.com
+WhatsApp: +60 12-525 4694
+Location: Malaysia
+
+/* SITE */
+Stack: HTML + Tailwind CSS + Vanilla JS
+Established: 2023
+ROC/SSM: 003369320-V
