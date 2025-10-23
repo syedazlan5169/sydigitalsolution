@@ -58,6 +58,7 @@
           <span class="sr-only">SY Digital Solution</span>
         </a>
         
+        <!-- Desktop Navigation -->
         <nav class="hidden md:flex items-center gap-6 text-sm">
           <a class="hover:text-brand-600" href="#services">Services</a>
           <a class="hover:text-brand-600" href="#work">Work</a>
@@ -73,7 +74,38 @@
             <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
           </a>
         </nav>
+
+        <!-- Mobile Menu Button -->
+        <button id="mobileMenuToggle" class="md:hidden rounded-lg p-2 hover:bg-slate-100 dark:hover:bg-slate-900" aria-label="Toggle mobile menu">
+          <svg id="hamburger" xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M3 12h18M3 6h18M3 18h18"/>
+          </svg>
+          <svg id="close" xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 hidden" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M18 6L6 18M6 6l12 12"/>
+          </svg>
+        </button>
       </div>
+    </div>
+
+    <!-- Mobile Menu -->
+    <div id="mobileMenu" class="hidden md:hidden border-t border-slate-200/60 dark:border-slate-800 bg-white/95 dark:bg-slate-950/95 backdrop-blur">
+      <nav class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 py-4 flex flex-col gap-4">
+        <a class="text-lg hover:text-brand-600 py-2" href="#services">Services</a>
+        <a class="text-lg hover:text-brand-600 py-2" href="#work">Work</a>
+        <a class="text-lg hover:text-brand-600 py-2" href="#process">Process</a>
+        <a class="text-lg hover:text-brand-600 py-2" href="#about">About</a>
+        <a class="text-lg hover:text-brand-600 py-2" href="#contact">Contact</a>
+        <div class="flex items-center gap-3 pt-2 border-t border-slate-200 dark:border-slate-800">
+          <button id="themeToggleMobile" class="rounded-full border border-slate-300 dark:border-slate-700 p-2 hover:bg-slate-100 dark:hover:bg-slate-900" aria-label="Toggle dark mode">
+            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 hidden dark:block" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M4.93 19.07l1.41-1.41M17.66 6.34l1.41-1.41"/></svg>
+            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 dark:hidden" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
+          </button>
+          <a href="#contact" class="inline-flex items-center justify-center gap-2 rounded-full bg-brand-600 px-6 py-2.5 text-white shadow hover:bg-brand-700 flex-1">
+            <span>Get in touch</span>
+            <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
+          </a>
+        </div>
+      </nav>
     </div>
   </header>
 
@@ -372,10 +404,41 @@
     if (saved === 'dark' || (!saved && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
       root.classList.add('dark');
     }
+    
+    // Theme toggle for desktop
     document.getElementById('themeToggle').addEventListener('click', () => {
       root.classList.toggle('dark');
       localStorage.setItem('theme', root.classList.contains('dark') ? 'dark' : 'light');
     });
+    
+    // Theme toggle for mobile
+    document.getElementById('themeToggleMobile').addEventListener('click', () => {
+      root.classList.toggle('dark');
+      localStorage.setItem('theme', root.classList.contains('dark') ? 'dark' : 'light');
+    });
+    
+    // Mobile menu toggle
+    const mobileMenuToggle = document.getElementById('mobileMenuToggle');
+    const mobileMenu = document.getElementById('mobileMenu');
+    const hamburger = document.getElementById('hamburger');
+    const closeIcon = document.getElementById('close');
+    
+    mobileMenuToggle.addEventListener('click', () => {
+      mobileMenu.classList.toggle('hidden');
+      hamburger.classList.toggle('hidden');
+      closeIcon.classList.toggle('hidden');
+    });
+    
+    // Close mobile menu when clicking on a link
+    const mobileMenuLinks = mobileMenu.querySelectorAll('a');
+    mobileMenuLinks.forEach(link => {
+      link.addEventListener('click', () => {
+        mobileMenu.classList.add('hidden');
+        hamburger.classList.remove('hidden');
+        closeIcon.classList.add('hidden');
+      });
+    });
+    
     // Footer year
     document.getElementById('y').textContent = new Date().getFullYear();
   </script>
